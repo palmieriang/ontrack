@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import Container from 'react-bootstrap/Container';
-import Table from 'react-bootstrap/Table';
 import './App.scss';
+import BooksList from './BooksList';
 
 const url = `http://nyx.vima.ekt.gr:3000/api/books`;
 const fetchBooks = (page) => fetch(url, {
@@ -64,24 +64,7 @@ const App = () => {
     <Container>
       {list.length > 0 ? (
         <Fragment>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author(s)</th>
-                <th>Year</th>
-              </tr>
-            </thead>
-            <tbody>
-              {list.map((book) => (
-                <tr key={book.id}>
-                  <td>{book.book_title}</td>
-                  <td>{book.book_author}</td>
-                  <td>{book.book_publication_year}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+          <BooksList books={list} />
           <PaginationElement />
         </Fragment>
       ) : (
