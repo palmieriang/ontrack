@@ -35,6 +35,7 @@ const App = () => {
     params.set('page', page);
     window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
   }
+
   const pageChanged = e => {
     setCurrentPage(parseInt(e.target.text));
     updateQueryString(parseInt(e.target.text));
@@ -61,7 +62,7 @@ const App = () => {
   }
 
   return (
-    <Container>
+    <Container className="App">
       {list.length > 0 ? (
         <Fragment>
           <BooksList books={list} />
