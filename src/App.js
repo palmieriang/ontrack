@@ -40,7 +40,7 @@ const App = () => {
 
     params.set('page', page);
     window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
-  }
+  };
 
   const pageChanged = e => {
     setCurrentPage(parseInt(e.target.text));
@@ -53,7 +53,7 @@ const App = () => {
         <p>Loading...</p>
       </Container>
     )
-  }
+  };
 
   return (
     <Container className="App">

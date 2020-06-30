@@ -10,7 +10,7 @@ const PaginationElement = ({ startPage, endPage, currentPage, totalPages, pageCh
                 {number}
             </Pagination.Item>,
         );
-    }
+    };
 
     return (
         <Pagination>
