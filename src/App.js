@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import paginate from 'jw-paginate';
+import * as qs from 'qs';
 import './App.scss';
 import BooksList from './BooksList';
 import PaginationElement from './PaginationElement';
@@ -13,10 +14,13 @@ const fetchBooks = (page) => fetch(url, {
   .then(response => response.json());
 
 const App = () => {
+  const queryString = window.location.search;
+  const parsedQueryString = qs.parse(queryString, { ignoreQueryPrefix: true });
+
   const [list, setList] = useState({});
   const [count, setCount] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(parseInt(parsedQueryString.page) || 1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
 
   const {startPage, endPage, totalPages} = paginate(count, currentPage, itemsPerPage);
@@ -29,7 +33,7 @@ const App = () => {
         setIsLoading(false);
       })
       .catch((error) => console.error('Error:', error));
-  }, [itemsPerPage, currentPage]);
+  }, [currentPage]);
 
   const updateQueryString = (page) => {
     const params = new URLSearchParams(window.location.search);
