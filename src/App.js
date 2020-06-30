@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import Pagination from 'react-bootstrap/Pagination';
 import Container from 'react-bootstrap/Container';
 import './App.scss';
 import BooksList from './BooksList';
+import PaginationElement from './PaginationElement';
 
 const url = `http://nyx.vima.ekt.gr:3000/api/books`;
 const fetchBooks = (page) => fetch(url, {
@@ -41,18 +41,6 @@ const App = () => {
     updateQueryString(parseInt(e.target.text));
   };
 
-  const PaginationElement = () => {
-    let items = [];
-    for (let number = 1; number <= count/itemsPerPage; number++) {
-      items.push(
-        <Pagination.Item key={number} active={number === currentPage} onClick={pageChanged}>
-          {number}
-        </Pagination.Item>,
-      );
-    }
-    return <Pagination>{items}</Pagination>;
-  }
-
   if(isLoading) {
     return (
       <div className="container">
@@ -66,7 +54,12 @@ const App = () => {
       {list.length > 0 ? (
         <Fragment>
           <BooksList books={list} />
-          <PaginationElement />
+          <PaginationElement
+            count={count}
+            itemsPerPage={itemsPerPage}
+            currentPage={currentPage}
+            pageChanged={pageChanged}
+          />
         </Fragment>
       ) : (
         <p>No book available</p>
