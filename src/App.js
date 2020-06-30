@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
+import paginate from 'jw-paginate';
 import './App.scss';
 import BooksList from './BooksList';
 import PaginationElement from './PaginationElement';
@@ -18,10 +19,11 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(20);
 
+  const {startPage, endPage, totalPages} = paginate(count, currentPage, itemsPerPage);
+
   useEffect(() => {
     fetchBooks(currentPage)
       .then(data => {
-        console.log(data.books);
         setList(data.books);
         setCount(data.count);
         setIsLoading(false);
@@ -43,9 +45,9 @@ const App = () => {
 
   if(isLoading) {
     return (
-      <div className="container">
+      <Container className="App">
         <p>Loading...</p>
-      </div>
+      </Container>
     )
   }
 
@@ -55,8 +57,9 @@ const App = () => {
         <Fragment>
           <BooksList books={list} />
           <PaginationElement
-            count={count}
-            itemsPerPage={itemsPerPage}
+            startPage={startPage}
+            endPage={endPage}
+            totalPages={totalPages}
             currentPage={currentPage}
             pageChanged={pageChanged}
           />
