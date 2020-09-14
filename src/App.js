@@ -5,13 +5,7 @@ import * as qs from 'qs';
 import './App.scss';
 import BooksList from './BooksList';
 import PaginationElement from './PaginationElement';
-
-const url = `http://nyx.vima.ekt.gr:3000/api/books`;
-const fetchBooks = (page) => fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({ page }),
-  })
-  .then(response => response.json());
+import { fetchBooks } from './utils/api';
 
 const App = () => {
   const queryString = window.location.search;
