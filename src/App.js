@@ -51,7 +51,7 @@ const App = () => {
 
   return (
     <Container className="App">
-      {list.length > 0 ? (
+      {list?.length > 0 ? (
         <Fragment>
           <BooksList books={list} />
           <PaginationElement
