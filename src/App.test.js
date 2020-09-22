@@ -16,7 +16,7 @@ const data = {
     id: 2086,
   },
   {
-    book_author: ["Ανώνυμος"],
+    book_author: ["Πολίτης, Ματθαίος"],
     book_pages: 32,
     book_publication_city: "Βενετία",
     book_publication_country: "Ιταλία",
@@ -34,5 +34,7 @@ describe("App", () => {
     render(<App />);
 
     await waitFor(() => expect(screen.getByText(`${data.books[0].book_publication_year}`)).toBeInTheDocument());
+    expect(screen.getByText(`${data.books[0].book_title}`)).toBeInTheDocument();
+    expect(screen.getByText(`${data.books[0].book_author}`)).toBeInTheDocument();
   });
 });
