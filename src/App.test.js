@@ -6,29 +6,39 @@ import { fetchBooks } from './utils/api';
 jest.mock("./utils/api");
 
 const data = {
-  books: [{
-    book_author: ["Ανώνυμος"],
-    book_pages: 104,
-    book_publication_city: "Βενετία",
-    book_publication_country: "Ιταλία",
-    book_publication_year: 1529,
-    book_title: "Ο Αλέξανδρος ο Μακεδών",
-    id: 2086,
-  },
-  {
-    book_author: ["Πολίτης, Ματθαίος"],
-    book_pages: 32,
-    book_publication_city: "Βενετία",
-    book_publication_country: "Ιταλία",
-    book_publication_year: 1548,
-    book_title: "Διήγησις εις τας πράξεις του περιβοήτου στρατηγού των ρωμαίων μεγάλου Βελισαρίου",
-    id: 2060,
-  }],
+  books: [
+    {
+      book_author: ["Ανώνυμος"],
+      book_pages: 104,
+      book_publication_city: "Βενετία",
+      book_publication_country: "Ιταλία",
+      book_publication_year: 1529,
+      book_title: "Ο Αλέξανδρος ο Μακεδών",
+      id: 2086,
+    },
+    {
+      book_author: ["Πολίτης, Ματθαίος"],
+      book_pages: 32,
+      book_publication_city: "Βενετία",
+      book_publication_country: "Ιταλία",
+      book_publication_year: 1548,
+      book_title: "Διήγησις εις τας πράξεις του περιβοήτου στρατηγού των ρωμαίων μεγάλου Βελισαρίου",
+      id: 2060,
+    },
+  ],
   count: 2425,
 };
 
 describe("App", () => {
-  it("should fetch and display the books list", async () => {
+  it("should fetch the books list", async () => {
+    fetchBooks.mockResolvedValueOnce(data);
+
+    render(<App />);
+
+    expect(fetchBooks).toHaveBeenCalled();
+  });
+
+  it("should display the books list", async () => {
     fetchBooks.mockResolvedValueOnce(data);
 
     render(<App />);
