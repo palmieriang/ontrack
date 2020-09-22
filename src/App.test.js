@@ -33,8 +33,6 @@ describe("App", () => {
 
     render(<App />);
 
-    // await waitFor(() => expect(screen.getByText(data.books[0].book_publication_year)).toBeInTheDocument());
-
-    screen.debug();
+    await waitFor(() => expect(screen.getByText(`${data.books[0].book_publication_year}`)).toBeInTheDocument());
   });
 });
