@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';
+import paginate from 'jw-paginate';
 
-const PaginationElement = ({ startPage, endPage, currentPage, totalPages, pageChanged }) => {
+const PaginationElement = ({ count, currentPage, itemsPerPage, pageChanged }) => {
+    const {startPage, endPage, totalPages} = paginate(count, currentPage, itemsPerPage);
+
     let items = [];
     for (let number = startPage; number <= endPage; number++) {
         items.push(
@@ -22,9 +25,9 @@ const PaginationElement = ({ startPage, endPage, currentPage, totalPages, pageCh
 }
 
 PaginationElement.propTypes = {
-    startPage: PropTypes.number,
+    count: PropTypes.number,
     endPage: PropTypes.number,
-    currentPage: PropTypes.number,
+    itemsPerPage: PropTypes.number,
     totalPages: PropTypes.number,
     pageChanged: PropTypes.func,
 };
