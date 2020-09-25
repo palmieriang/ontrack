@@ -33,9 +33,11 @@ const App = () => {
     window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
   };
 
-  const pageChanged = e => {
-    setCurrentPage(parseInt(e.target.text));
-    updateQueryString(parseInt(e.target.text));
+  const pageChanged = event => {
+    if (event.target.text) {
+      setCurrentPage(parseInt(event.target.text));
+      updateQueryString(parseInt(event.target.text));
+    }
   };
 
   if(isLoading) {
