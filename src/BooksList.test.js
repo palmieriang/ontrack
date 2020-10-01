@@ -2,8 +2,6 @@ import React from "react";
 import { render, waitFor, screen } from "@testing-library/react";
 import BooksList from "./BooksList";
 
-jest.mock("./utils/api");
-
 const books = [
   {
     book_author: ["Ανώνυμος"],
