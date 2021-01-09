@@ -1,10 +1,10 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import Container from 'react-bootstrap/Container';
-import * as qs from 'qs';
-import './App.scss';
-import BooksList from './BooksList';
-import PaginationElement from './PaginationElement';
-import { fetchBooks } from './utils/api';
+import React, { Fragment, useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import * as qs from "qs";
+import "./App.scss";
+import BooksList from "./BooksList";
+import PaginationElement from "./PaginationElement";
+import { fetchBooks } from "./utils/api";
 
 const App = () => {
   const queryString = window.location.search;
@@ -12,41 +12,60 @@ const App = () => {
 
   const [list, setList] = useState({});
   const [count, setCount] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(parseInt(parsedQueryString.page) || 1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(parsedQueryString.page) || 1
+  );
   const [itemsPerPage, setItemsPerPage] = useState(20);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchBooks(currentPage)
-      .then(data => {
+      .then((data) => {
         setList(data.books);
         setCount(data.count);
         setIsLoading(false);
       })
-      .catch((error) => console.error('Error:', error));
+      .catch((error) => {
+        setError(error.message);
+        setIsLoading(false);
+      });
   }, [currentPage]);
 
   const updateQueryString = (page) => {
     const params = new URLSearchParams(window.location.search);
 
-    params.set('page', page);
-    window.history.replaceState({}, '', `${window.location.pathname}?${params}`)
+    params.set("page", page);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params}`
+    );
   };
 
-  const pageChanged = event => {
+  const pageChanged = (event) => {
     if (event.target.text) {
       setCurrentPage(parseInt(event.target.text));
       updateQueryString(parseInt(event.target.text));
     }
   };
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <Container className="App">
         <p>Loading...</p>
       </Container>
-    )
-  };
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="App">
+        <p>{error}</p>
+      </Container>
+    );
+  }
 
   return (
     <Container className="App">
@@ -65,6 +84,6 @@ const App = () => {
       )}
     </Container>
   );
-}
+};
 
 export default App;
