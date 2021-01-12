@@ -15,4 +15,10 @@ describe("App", () => {
     cy.findByTestId("pagination-element");
     cy.should("exist");
   });
+
+  it("should update a query string on pagination changed", () => {
+    cy.visit("/");
+    cy.findByText(/^2$/).click();
+    cy.url().should("include", "page=2");
+  });
 });

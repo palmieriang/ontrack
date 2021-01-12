@@ -12,6 +12,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env jest-environment-jsdom-fourteen",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:3000 cy:open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +45,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^4.0.1"
+    "react-scripts": "^4.0.1",
+    "start-server-and-test": "^1.11.7"
   }
 }
