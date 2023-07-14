@@ -5,7 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "jw-paginate": "^1.0.4",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "qs": "^6.9.4"
   },
   "scripts": {
@@ -45,7 +45,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^4.0.1",
+    "react-scripts": "^5.0.1",
     "start-server-and-test": "^1.11.7"
   }
 }
